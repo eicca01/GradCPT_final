@@ -1668,6 +1668,7 @@ function uploadFileToTransferSh(results, outcomes) {
 
 // Funktion zur Abfrage des Probanden-Codes
 function showIdPopup() {
+if (!userID) { // Nur anzeigen, wenn userID noch nicht gesetzt ist
     // User-Eingabe mit einer verständlichen Anleitung abfragen
     userID = prompt(
         "Bitte geben Sie hier Ihren zuvor generierten Probanden-Code ein! \n\n" +

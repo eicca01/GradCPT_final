@@ -1454,21 +1454,16 @@ function uploadFileToTransferSh(results, outcomes) {
     const blob = new Blob([data], { type: 'application/json' });
 
     // Datei zu Transfer.sh hochladen
-    fetch('https://transfer.sh/results.json', {
-        method: 'PUT',
-        body: blob,
-    })
-    .then(response => response.text())
-    .then(link => {
-        console.log('Datei erfolgreich hochgeladen:', link);
-        alert(`Datei hochgeladen! URL: ${link}`);
-
-        // URL per E-Mail senden
-        sendEmail(link);
-    })
-    .catch(error => {
-        console.error('Fehler bei der Verbindung zu Transfer.sh:', error);
-        alert('Fehler bei der Verbindung zu Transfer.sh.');
+    fetch('https://file.io', {
+    method: 'POST',
+    body: new FormData().append('file', fileBlob), // fileBlob: Ihre Datei
+})
+.then(response => response.json())
+.then(data => {
+    console.log('Datei hochgeladen:', data.link); // Enthält den Link zur hochgeladenen Datei
+    sendEmail(data.link); // E-Mail mit dem Link senden
+})
+.catch(error => console.error('Fehler beim Hochladen:', error));
     });
 }
 

@@ -1449,22 +1449,29 @@ function sendEmail() {
                        '20pt');
     }
 
-function uploadFileToTransferSh(results, outcomes) {
-    const data = JSON.stringify({ results, outcomes }, null, 2);
-    const blob = new Blob([data], { type: 'application/json' });
+function uploadFileToFileIo(results, outcomes) {
+    const data = JSON.stringify({ results, outcomes }, null, 2); // Convert results to JSON
+    const blob = new Blob([data], { type: 'application/json' }); // Create a Blob
 
-    // Datei zu Transfer.sh hochladen
+    // Prepare the FormData to include the Blob
+    const formData = new FormData();
+    formData.append('file', blob, 'results.json');
+
+    // Upload the file using fetch
     fetch('https://file.io', {
-    method: 'POST',
-    body: new FormData().append('file', fileBlob), // fileBlob: Ihre Datei
-})
-.then(response => response.json())
-.then(data => {
-    console.log('Datei hochgeladen:', data.link); // Enthält den Link zur hochgeladenen Datei
-    sendEmail(data.link); // E-Mail mit dem Link senden
-})
-.catch(error => console.error('Fehler beim Hochladen:', error));
-    });
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Datei hochgeladen:', data.link); // Log the download link
+            sendEmail(data.link); // Send email with the link
+        } else {
+            console.error('Fehler beim Hochladen:', data);
+        }
+    })
+    .catch(error => console.error('Fehler beim Hochladen:', error));
 }
 
 

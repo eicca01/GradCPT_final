@@ -1702,12 +1702,12 @@ transporter.sendMail(mailOptions, (error, info) => {
 
 				     "Beispiel: Beate Müller, Mutter: Karin, geb. 03.12.1964, wohnhaft in der Nebenstraße, Vater: Wolfgang  \n"+
 				     "-> der Probanden-Code von Beate Müller wäre: KANENG03"); 
-	console.log("UserID:", userID); // Ausgabe in der Konsole für Debugging
-}}
-    console.log("UserID:", userID); // Ausgabe in der Konsole	
-    // let userID = "TestUser123";
-    console.log("UserID:", userID); // Ausgabe in der Konsole
-
+	 if (!userID) {
+        alert("Kein Code eingegeben. Bitte starten Sie den Test erneut.");
+        return; // Beenden, wenn kein Code eingegeben wurde
+    }
+    console.log("UserID erfolgreich gesetzt:", userID);
+}
     </script>
     <!-- <button onclick="sendEmail()">E-Mail senden</button> -->
 

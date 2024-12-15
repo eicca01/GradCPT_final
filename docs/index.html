@@ -607,6 +607,33 @@
             }
         }
     }
+	    
+// Funktion zum Senden der Ergebnisse an die API
+function sendResults() {
+    const resultsData = {
+        userID: userID || userID, 
+        results: results,             // Ergebnisse aus saveData()
+    };
+
+    fetch('https://gradcpt-server-bap5j5yr5-eicca01s-projects.vercel.app/api/send-email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(resultsData), // Ergebnisse an die API senden
+    })
+        .then((response) => {
+            if (response.ok) {
+                alert('Ergebnisse erfolgreich gesendet!');
+            } else {
+                alert('Fehler beim Senden der Ergebnisse.');
+            }
+        })
+        .catch((error) => {
+            console.error('Fehler:', error);
+            alert('Ein Fehler ist aufgetreten.');
+        });
+}
 
     function saveData()
     {
@@ -689,6 +716,9 @@
                 state: (typeof state[i] !== 'undefined' &&
                         state[i] !== null)? state[i] : null
             });
+		// Am Ende: sendResults aufrufen
+if (i === numTrials) {
+    sendResults();
         }
     }
 

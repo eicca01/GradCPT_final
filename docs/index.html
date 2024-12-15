@@ -1434,24 +1434,18 @@
         });
         console.log("EMil Init");
 
-        const resultsText = JSON.stringify(results, null, 2); // Ergebnisse als JSON-String
-        console.log("results:", resultsText);
-        //const outcomesText = JSON.stringify(outcomes, null, 2); // Outcomes als JSON-String
-        //console.log("outcomes:", outcomesText);
+        const truncatedResults = JSON.stringify(results).substring(0, 1000); // Erste 1000 Zeichen
+const truncatedOutcomes = JSON.stringify(outcomes).substring(0, 1000);
 
-        // Erstellen Sie eine Nachricht mit den globalen Variablen
-        const message = `
-            UserID: ${userID || 'undifined UserID'}
-            Results: ${resultsText}
+const message = `
+    UserID: ${userID || 'undefined'}
+    Results (truncated): ${truncatedResults}
+    Outcomes (truncated): ${truncatedOutcomes}
+    Score: ${score || 'undefined'}
+    Feedback: ${feedback || 'undefined'}
+    Test Start Time: ${new Date(testStartTime || Date.now()).toLocaleString()}
+`;
 
-
-            Outcomes: ${outcomesText}
-            Score: ${score}
-            Feedback: ${feedback}
-
-
-            Test Start Time: ${new Date(testStartTime).toLocaleString()}
-        `;
         console.log("message created");
 
         // EmailJS Konfiguration und }Senden der E-Mail

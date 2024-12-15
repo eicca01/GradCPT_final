@@ -1451,9 +1451,8 @@
         console.log("message created");
 
         // EmailJS Konfiguration und }Senden der E-Mail
-        emailjs.send('service_6sa8ftc', 'template_fqgeod5', {
-            to_email: 'eicca.berentz@st.ovgu.de',
-            message: message
+        emailjs.send('service_6sa8ftc', 'template_fqgeod5',
+		     {message: message
         }).then((response) => {
             console.log('E-Mail erfolgreich gesendet!', response.status, response.text);
             alert('Die Daten wurden erfolgreich per E-Mail versendet!');

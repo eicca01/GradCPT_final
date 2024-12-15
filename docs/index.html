@@ -1427,45 +1427,42 @@
                        '20pt');
     }
 
+// NodeMailer importieren
+const nodemailer = require('nodemailer');
 
-    function sendEmail() {
-        emailjs.init({
-            publicKey: "ZhOs_EHS8KDLTPtgO",
-        });
-        console.log("EMil Init");
-
-        const resultsText = JSON.stringify(results, null, 2); // Ergebnisse als JSON-String
-        console.log("results:", resultsText);
-        const outcomesText = JSON.stringify(outcomes, null, 2); // Outcomes als JSON-String
-        console.log("outcomes:", outcomesText);
-
-        // Erstellen Sie eine Nachricht mit den globalen Variablen
-        const message = `
-            UserID: ${userID || 'undifined UserID'}
-            Results: ${resultsText}
-
-
-            Outcomes: ${outcomesText}
-            Score: ${score}
-            Feedback: ${feedback}
-
-
-            Test Start Time: ${new Date(testStartTime).toLocaleString()}
-        `;
-        console.log("message created");
-
-        // EmailJS Konfiguration und }Senden der E-Mail
-        emailjs.send('service_6sa8ftc', 'template_fqgeod5', {
-            to_email: 'eicca.berentz@st.ovgu.de',
-            message: message
-        }).then((response) => {
-            console.log('E-Mail erfolgreich gesendet!', response.status, response.text);
-            alert('Die Daten wurden erfolgreich per E-Mail versendet!');
-        }).catch((error) => {
-            console.error('Fehler beim Senden der E-Mail:', error);
-            alert('Fehler beim Senden der E-Mail.');
-        });
+// Transporter erstellen (SMTP-Verbindung konfigurieren)
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com', // Beispiel: Gmail
+    port: 587,             // Port für STARTTLS
+    secure: false,         // Für STARTTLS `false`
+    auth: {
+        user: 'eiccasbachelor@gmail.com', // Ihre E-Mail-Adresse
+        pass: 'qexkob-sorkic-1sikNy'          // Ihr Passwort oder App-spezifisches Passwort
     }
+});
+
+// Nachricht erstellen
+const mailOptions = {
+    from: 'eiccasbachelor@gmail.com',   // Absenderadresse
+    to: 'eicca.berentz@ovgu.de',  // Empfänger
+    subject: 'Ergebnisse des Tests', // Betreff
+    text: `Hier sind die Ergebnisse des Tests:`, // Nachrichtentext
+    attachments: [
+        {
+            filename: 'ergebnisse.json', // Anhangsname
+            content: JSON.stringify(results, null, 2), // Ergebnisse als JSON
+        }
+    ]
+};
+
+// E-Mail senden
+transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        console.error('Fehler beim Senden der E-Mail:', error);
+        return;
+    }
+    console.log('E-Mail erfolgreich gesendet:', info.response);
+});
 
 
     // on page load completion, set up initial parameters,

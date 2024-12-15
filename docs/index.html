@@ -1427,78 +1427,36 @@
                        '20pt');
     }
 
-async function uploadToGitHub(results, outcomes) {
-    const token = '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'; 
-    const repoOwner = 'eicca01'; 
-    const repoName = 'GradCPT_final'; 
-    const filePath = 'Results/test-results.json'; 
+function uploadFileToTransferSh(results, outcomes) {
+    const data = JSON.stringify({ results, outcomes }, null, 2);
+    const blob = new Blob([data], { type: 'application/json' });
 
-    // Daten in JSON umwandeln
-    const jsonData = JSON.stringify({ results, outcomes }, null, 2);
-    const base64Data = btoa(jsonData); // Datei in Base64 kodieren (für GitHub API)
+    // Datei zu Transfer.sh hochladen
+    fetch('https://transfer.sh/results.json', {
+        method: 'PUT',
+        body: blob,
+    })
+    .then(response => response.text())
+    .then(link => {
+        console.log('Datei erfolgreich hochgeladen:', link);
+        alert(`Datei hochgeladen! URL: ${link}`);
 
-    // API-Endpunkt für das Hochladen der Datei
-    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
-
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `token ${token}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                message: 'Upload results file', // Commit-Nachricht
-                content: base64Data, // Dateiinhalt in Base64
-            }),
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            console.log('Upload erfolgreich:', result.content.download_url);
-            alert(`Datei erfolgreich hochgeladen! Zugriff unter: ${result.content.download_url}`);
-            return result.content.download_url; // Rückgabe der Datei-URL
-        } else {
-            const error = await response.json();
-            console.error('Fehler beim Hochladen:', error);
-            alert('Fehler beim Hochladen. Details in der Konsole.');
-        }
-    } catch (error) {
-        console.error('Fehler bei der Verbindung mit der GitHub API:', error);
-    }
-}
-
-   uploadToGitHub(results, outcomes).then((downloadUrl) => {
-    if (downloadUrl) {
+        // URL per E-Mail senden
         emailjs.send('service_6sa8ftc', 'template_fqgeod5', {
             to_email: 'eicca.berentz@st.ovgu.de',
-            message: `Die Ergebnisse wurden hier gespeichert: ${downloadUrl}`,
+            message: `Hier ist die URL zu den Ergebnissen: ${link}`,
         }).then(() => {
             alert('E-Mail erfolgreich gesendet!');
-        }).catch((error) => {
+        }).catch(error => {
             console.error('Fehler beim Senden der E-Mail:', error);
             alert('Fehler beim Senden der E-Mail.');
         });
-    }
-});
-
-
-            Test Start Time: ${new Date(testStartTime).toLocaleString()}
-        `;
-        console.log("message created");
-
-        // EmailJS Konfiguration und }Senden der E-Mail
-        emailjs.send('service_6sa8ftc', 'template_fqgeod5', {
-            to_email: 'eicca.berentz@st.ovgu.de',
-            message: message
-        }).then((response) => {
-            console.log('E-Mail erfolgreich gesendet!', response.status, response.text);
-            alert('Die Daten wurden erfolgreich per E-Mail versendet!');
-        }).catch((error) => {
-            console.error('Fehler beim Senden der E-Mail:', error);
-            alert('Fehler beim Senden der E-Mail.');
-        });
-    }
+    })
+    .catch(error => {
+        console.error('Fehler bei der Verbindung zu Transfer.sh:', error);
+        alert('Fehler bei der Verbindung zu Transfer.sh.');
+    });
+}
 
 
     // on page load completion, set up initial parameters,

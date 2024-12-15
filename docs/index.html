@@ -161,7 +161,7 @@
 function sendEmail() {
     emailjs.send('service_6sa8ftc', 'template_fqgeod5', {
         to_email: 'eicca.berentz@st.ovgu.de',
-        message: 'Hier ist die URL zu den Ergebnissen: ${link}',
+        message: `Hier ist die URL zu den Ergebnissen: ${link}`,
     }).then(() => {
         console.log('E-Mail erfolgreich gesendet!');
     }).catch((error) => {
@@ -1466,12 +1466,6 @@ function uploadFileToTransferSh(results, outcomes) {
         // URL per E-Mail senden
         sendEmail(link);
     })
-    .catch(error => {
-        console.error('Fehler bei der Verbindung zu Transfer.sh:', error);
-        alert('Fehler bei der Verbindung zu Transfer.sh.');
-    });
-}
-	    
     .catch(error => {
         console.error('Fehler bei der Verbindung zu Transfer.sh:', error);
         alert('Fehler bei der Verbindung zu Transfer.sh.');

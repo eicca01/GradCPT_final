@@ -82,8 +82,6 @@
 
     // Globals
     let userID = null; // Standardwert, bevor der Benutzer seinen Code eingibt
-
-var userID;   		    // User-ID
     var scriptName;                 // the name of this script
     var testVersion;                // version identifier for this test
     var seed;                       // RNG seed
@@ -1690,7 +1688,7 @@ transporter.sendMail(mailOptions, (error, info) => {
     <script>
 
 	function showIdPopup() {
-		let userID = prompt("Bitte geben Sie hier ihren zuvor generierte Probanden-Code ein! \n \n"+
+		userID = prompt("Bitte geben Sie hier ihren zuvor generierte Probanden-Code ein! \n \n"+
 				     "Hier ist noch einmal die Anleitung: \n"+
 				     "Bitte erstellen Sie hier zuerst mithilfe der folgenden Anleitung Ihren eigenen Probanden-Code. \n \n"+ 
 
@@ -1704,7 +1702,8 @@ transporter.sendMail(mailOptions, (error, info) => {
 
 				     "Beispiel: Beate Müller, Mutter: Karin, geb. 03.12.1964, wohnhaft in der Nebenstraße, Vater: Wolfgang  \n"+
 				     "-> der Probanden-Code von Beate Müller wäre: KANENG03"); 
-	}
+	console.log("UserID:", userID); // Ausgabe in der Konsole für Debugging
+}}
     console.log("UserID:", userID); // Ausgabe in der Konsole	
     // let userID = "TestUser123";
     console.log("UserID:", userID); // Ausgabe in der Konsole

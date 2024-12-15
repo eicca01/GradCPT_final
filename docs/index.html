@@ -1668,27 +1668,26 @@ function uploadFileToTransferSh(results, outcomes) {
 
 // Funktion zur Abfrage des Probanden-Codes
 function showIdPopup() {
-if (!userID) { // Nur anzeigen, wenn userID noch nicht gesetzt ist
-    // User-Eingabe mit einer verständlichen Anleitung abfragen
-    userID = prompt(
-        "Bitte geben Sie hier Ihren zuvor generierten Probanden-Code ein! \n\n" +
-        "Hier ist noch einmal die Anleitung:\n" +
-        "Bitte erstellen Sie Ihren Probanden-Code wie folgt:\n\n" +
-        "- Die ersten zwei Buchstaben des Vornamens Ihrer Mutter\n" +
-        "- Die ersten zwei Buchstaben der Straße, in der Sie aktuell wohnen\n" +
-        "- Die letzten beiden Buchstaben des Vornamens Ihres Vaters\n" +
-        "- Der Tag Ihres Geburtstages\n\n" +
-        "Bitte nutzen Sie für Ihren Probanden-Code nur GROSSBUCHSTABEN.\n\n" +
-        "Beispiel:\n" +
-        "Beate Müller, Mutter: Karin, geb. 03.12.1964, wohnhaft in der Nebenstraße, Vater: Wolfgang\n" +
-        "-> Der Probanden-Code von Beate Müller wäre: KANENG03"
-    );
+    if (!userID) { // Nur anzeigen, wenn userID noch nicht gesetzt ist
+        userID = prompt(
+            "Bitte geben Sie hier Ihren zuvor generierten Probanden-Code ein! \n\n" +
+            "Hier ist noch einmal die Anleitung: \n" +
+            "Bitte erstellen Sie hier zuerst mithilfe der folgenden Anleitung Ihren eigenen Probanden-Code. \n\n" +
+            "Für Ihren Probanden-Code nehmen Sie bitte: \n" +
+            "- die ersten zwei Buchstaben des Vornamens Ihrer Mutter  \n" +
+            "- die ersten zwei Buchstaben der Straße, in der Sie aktuell wohnen  \n" +
+            "- die letzten beiden Buchstaben des Vornamens Ihres Vaters  \n" +
+            "- den Tag Ihres Geburtstages \n\n" +
+            "Bitte nutzen Sie für Ihren Probanden-Code nur GROSSBUCHSTABEN. \n\n" +
+            "Beispiel: Beate Müller, Mutter: Karin, geb. 03.12.1964, wohnhaft in der Nebenstraße, Vater: Wolfgang  \n" +
+            "-> der Probanden-Code von Beate Müller wäre: KANENG03"
+        );
 
-    // Überprüfen, ob der Nutzer etwas eingegeben hat
-    if (!userID) {
-        console.log("Kein Probanden-Code eingegeben.");
-    } else {
-        console.log("Probanden-Code:", userID); // Ausgabe in der Konsole
+        if (userID) {
+            console.log("UserID:", userID); // Ausgabe in der Konsole
+        } else {
+            alert("Sie haben keinen Code eingegeben. Bitte laden Sie die Seite neu und geben Sie einen Code ein.");
+        }
     }
 }
 

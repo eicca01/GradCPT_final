@@ -157,6 +157,12 @@
     var usage = "";                 // URL parameter: show usage
     var chosenInput;                // input type (taps or keys)
 	var practiceChoice = null;	// whether the participant chose to complete optional practice trials
+	emailjs.init({
+       		publicKey: "ZhOs_EHS8KDLTPtgO",
+        	});
+        
+    }
+	
 
 	// message for optional practice trials
 	function showOptionalPractice()
@@ -1631,13 +1637,6 @@ emailjs.send('service_6sa8ftc', 'template_fqgeod5', {
         	if (useChooseInput) chooseInput({keyboard: true, touch: true},setInput);
         	else setInput('taps');
         }
-
-        emailjs.init({
-            publicKey: "ZhOs_EHS8KDLTPtgO",
-        });
-        
-    }
-	
 	
     </script>
 

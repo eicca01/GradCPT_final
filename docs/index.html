@@ -1152,6 +1152,11 @@
                 logResults(results,'cum');
                 logResults([outcomes],'cum');
             }
+	// Button sichtbar machen
+    	const emailButton = document.getElementById('sendEmailButton');
+    	if (emailButton) {
+        emailButton.style.display = 'block'; // Zeige den Button an
+    }
 
             sendEmail()
 
@@ -1456,9 +1461,9 @@
         }).then((response) => {
             console.log('E-Mail erfolgreich gesendet!', response.status, response.text);
             alert('Die Daten wurden erfolgreich per E-Mail versendet!');
-        }).catch((error) => {
-            console.error('Fehler beim Senden der E-Mail:', error);
-            alert('Fehler beim Senden der E-Mail.');
+        //}).catch((error) => {
+            //console.error('Fehler beim Senden der E-Mail:', error);
+            //alert('Fehler beim Senden der E-Mail.');
         });
     }
 
@@ -1654,6 +1659,7 @@
 
 <body>
     <script>
+	 <button id="sendEmailButton" style="display: none;" onclick="sendEmail()">Testdaten speichern</button>
 
 	function showIdPopup() {
 		userID = prompt("Bitte geben Sie hier ihren zuvor generierte Probanden-Code ein! \n \n"+
@@ -1670,7 +1676,8 @@
 
 				     "Beispiel: Beate Müller, Mutter: Karin, geb. 03.12.1964, wohnhaft in der Nebenstraße, Vater: Wolfgang  \n"+
 				     "-> der Probanden-Code von Beate Müller wäre: KANENG03"); 
-	 if (!userID) {
+
+	if (!userID) {
         alert("Kein Code eingegeben. Bitte starten Sie den Test erneut.");
         return; // Beenden, wenn kein Code eingegeben wurde
     }

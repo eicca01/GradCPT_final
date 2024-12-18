@@ -1049,6 +1049,10 @@
 
             // show cursor
             showCursor("document.body");
+		// Button sichtbar machen
+    		const sendButton = document.getElementById("sendEmailButton");
+    		sendButton.style.display = "block";
+   		sendButton.focus(); // Optional, um den Button zu fokussieren
 
             // extract test trials, correct trials and correct go trials
             tmp1 = results.filter(function (obj)
@@ -1677,7 +1681,10 @@
     console.log("UserID erfolgreich gesetzt:", userID);
 }
     </script>
-	<button onclick="sendEmail()">E-Mail senden</button>
+	<button id="sendEmailButton" onclick="sendEmail()" style="display: none; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 20px 40px; font-size: 1.5rem; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer;">
+    E-Mail senden
+</button>
+
 
 
     <div id="pics" class="picsRegular">

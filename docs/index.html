@@ -180,11 +180,11 @@
                              "von Bergen und Städten sehen.<br><br>"),
             "practice1": ("<h3>Anweisungen:</h3>" +
                             "Wenn Sie ein  <b>STADTBILD</b> sehen,<br>" +
-                          (chosenInput === 'taps' ? "<b>tap it</b> "
+                          (chosenInput === 'taps' ? "<b> bitte drücken.</b> "
                           : "drücken und lassen Sie die <b>LEERTASTE</b> los<br>") +
                           "(so schnell wie möglich).<br><br>" +
                           "Wenn Sie ein <b>BERGBILD</b> sehen,<br>" +
-                          (chosenInput === 'taps' ? "<b>DON'T TAP</b> it.<br><br>"
+                          (chosenInput === 'taps' ? "<b>bitte NICHT drücken.</b> it.<br><br>"
                           : "<b>DRÜCKEN SIE KEINE</b> Taste.<br><br>") +
                           "Übung folgt.<br><br>"),
             "practice2": ("Gut gemacht!<br><br>" +
@@ -193,11 +193,11 @@
                         "von einem zum nächsten Bild wechseln.<br><br>"),
             "practice3": ("Die Aufgabe bleibt gleich wie zuvor:<br><br>" +
                         "Wenn Sie ein <b>STADTBILD</b> sehen,<br>" +
-                        (chosenInput === 'taps' ? "<b>tap it</b> "
+                        (chosenInput === 'taps' ? "<b>bitte drücken.</b> "
                         : "drücken und lassen Sie die <b>LEERTASTE</b> los<br>") +
                         "(so schnell wie möglich).<br><br>" +
                         "Wenn Sie ein <b>BERGBILD</b> sehen,<br>" +
-                        (chosenInput === 'taps' ? "<b>DON'T TAP</b> it.<br><br>"
+                        (chosenInput === 'taps' ? "<b>NICHT drücken.</b> it.<br><br>"
                         : "<b>DRÜCKEN SIE KEINE</b> Taste.<br><br>") +
                         "Übung folgt.<br><br>"),
             "practice4": ("Sehr gut!<br><br>" +
@@ -206,11 +206,11 @@
                         "und es wird kein Feedback geben.<br><br>"),
             "practice5": ("Die Aufgabe bleibt gleich wie zuvor:<br><br>" +
                         "Wenn Sie ein <b>STADTBILD</b> sehen,<br>" +
-                          (chosenInput === 'taps' ? "<b>tap it</b> "
+                          (chosenInput === 'taps' ? "<b>bitte drücken.</b> "
                           : "drücken und lassen Sie die <b>LEERTASTE</b> los<br>") +
                           "(so schnell wie möglich).<br><br>" +
                           "Wenn Sie ein <b>BERGBILD</b> sehen,<br>" +
-                          (chosenInput === 'taps' ? "<b>DON'T TAP</b> it.<br><br>"
+                          (chosenInput === 'taps' ? "<b>NICHT drücken.</b> it.<br><br>"
                           : "<b>DRÜCKEN SIE KEINE</b> Taste.<br><br>") +
                           "Übung folgt.<br><br>"),
             "practice6": ("Hervorragend!<br><br>" +
@@ -1119,7 +1119,7 @@
 			setTimeout(function()
 			{
                 showAlert(msg,
-                      (chosenInput === 'taps' ? (!correct ? "Tap here to retry" : ""): ''),
+                      (chosenInput === 'taps' ? (!correct ? "Zum Wiederholen drücken." : ""): ''),
                       function()
                       {
                           showFrame("null");
@@ -1146,7 +1146,7 @@
             if (frame.type === "begin")
             {
                 showAlert(frame.message,
-                    (chosenInput === 'taps' ? "Tap here for instructions" : ''),
+                    (chosenInput === 'taps' ? "Für Anleitung drücken." : ''),
                     function ()
                     {
                         nextTrial();
@@ -1160,7 +1160,7 @@
             else if (frame.type === "message")
             {
                 showAlert(frame.message,
-                    (chosenInput === 'taps' ? "Tap here to continue" : ''),
+                    (chosenInput === 'taps' ? "Bitte drücken." : ''),
                     function ()
                     {
                         nextTrial();
